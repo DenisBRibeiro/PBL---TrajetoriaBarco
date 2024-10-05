@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBL - TrajetoriaBarco", "PBL - TrajetoriaBarco\PBL - TrajetoriaBarco.csproj", "{D0D8281D-6D30-4985-8FE1-4298B4C91642}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0D8281D-6D30-4985-8FE1-4298B4C91642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D8281D-6D30-4985-8FE1-4298B4C91642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D8281D-6D30-4985-8FE1-4298B4C91642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D8281D-6D30-4985-8FE1-4298B4C91642}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A84E55B1-E059-41D2-BF1C-13D43E1F555A}
+	EndGlobalSection
+EndGlobal
