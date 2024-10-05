@@ -10,11 +10,30 @@ using System.Windows.Forms;
 
 namespace PBL___TrajetoriaBarco
 {
-    public partial class Form1 : Form
+    public partial class TelaInicial : Form
     {
-        public Form1()
+        public TelaInicial()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Enviar_Click(object sender, EventArgs e)
+        {
+            // Ler o texto da caixa de texto
+            string userInput = Largura.Text;
+
+            // Exibir uma mensagem com a entrada do usuário
+            MessageBox.Show("Você digitou: " + userInput);
         }
     }
 }
