@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -19,6 +20,95 @@ namespace PBL___TrajetoriaBarco
             InitializeComponent();
             historicoTentativas = new List<string>();
         }
+
+        //CODIGO DESENVOLVIDO PARA FUNCIONALIDADE DE SALVAMENTO E EXIBIÇÃO DO HISTÓRICO EM ARQUIVO (CTRL+K e CTRL+U para descomentar)
+        //ATENÇÃO!!!!--> trocar o static nas funções por private caso sejam implementadas separadamente da função principal, senão os componentes não serão reconhecidos
+        /* TODO: implementação das variáveis existentes no código 
+         * Adicionar um DataGridView na interface 
+         * Configurar os botões para chamada das funções (botão de exibir histórico) 
+         * A função SalvarSimulação() deverá ser chamada dentro do código principal
+         */
+
+
+        //Configuração das colunas (se não usar o designer) --
+
+        //dataGridViewHistorico.Columns.Add("Data", "Data");
+        //dataGridViewHistorico.Columns.Add("Velocidade", "Velocidade do Barco");
+        //dataGridViewHistorico.Columns.Add("Correnteza", "Força da Correnteza");
+        //dataGridViewHistorico.Columns.Add("Margem", "Posição da Margem");
+        //dataGridViewHistorico.Columns.Add("Angulo", "Ângulo (graus)");
+        //dataGridViewHistorico.Columns.Add("Distancia", "Distância (metros)");
+
+        //ESTA FUNÇÃO DEVERÁ SER CHAMADA NO FINAL DO CALCULO NO CÓDIGO PRINCIPAL
+        //static void SalvarSimulacao(adicionar parametros aqui)
+        //{
+        //    try
+        //    {
+        //        //Salva o um arquivo como histórico no caminho da pasta Documentos do usuário
+        //        string caminhoPastaDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //        string caminhoArquivo = System.IO.Path.Combine(caminhoPastaDocumentos, "historico_simulacoes.txt");
+
+        //        //Linha a ser gravada no arquivo
+        //        string linha = $"{variabel1};{variavel2}...";
+
+        //        //Salvar no arquivo de histórico
+        //        System.IO.File.AppendAllText(caminhoArquivo, linha + Environment.NewLine);
+        //    }
+        //    catch (UnauthorizedAccessException ex)
+        //    {
+        //        MessageBox.Show("Permissão negada para salvar o arquivo. Verifique as permissões de escrita.", "Erro de Permissão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    catch (IOException ex)
+        //    {
+        //        MessageBox.Show("Ocorreu um erro ao acessar o arquivo. Tente novamente.", "Erro de I/O", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Erro inesperado ao salvar o histórico: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //static void CarregarHistorico()
+        //{
+        //    try
+        //    {
+        //        //Localiza o caminho da pasta Documentos do usuário
+        //        string caminhoPastaDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //        string caminhoArquivo = System.IO.Path.Combine(caminhoPastaDocumentos, "historico_simulacoes.txt");
+
+        //        //Verifica se o arquivo existe
+        //        if (System.IO.File.Exists(caminhoArquivo))
+        //        {
+        //            //Limpa o DataGridView antes de carregar
+        //            dataGridViewHistorico.Rows.Clear();
+
+        //            //Lê as linhas do arquivo de histórico
+        //            string[] linhas = System.IO.File.ReadAllLines(caminhoArquivo);
+
+        //            foreach (var linha in linhas)
+        //            {
+        //                //Divide a linha em partes (assumindo que estão separadas por ponto e vírgula)
+        //                string[] partes = linha.Split(';');
+
+        //                //Adiciona cada linha ao DataGridView (colunas: Data, Velocidade, Correnteza, Margem, Ângulo, Distância)
+        //                dataGridViewHistorico.Rows.Add(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //Se o arquivo não existir, exibe uma mensagem
+        //            MessageBox.Show("O arquivo de histórico não foi encontrado.", "Erro de Arquivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        }
+        //    }
+        //    catch (IOException ex)
+        //    {
+        //        MessageBox.Show("Erro ao ler o arquivo de histórico. Verifique se o arquivo está acessível.", "Erro de I/O", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Erro inesperado ao carregar o histórico: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void buttonIniciar_Click(object sender, EventArgs e)
         {
@@ -53,6 +143,8 @@ namespace PBL___TrajetoriaBarco
                 // Adicionando a tentativa ao histórico
                 string tentativa = $"Largura: {largura} m, Velocidade do Barco: {velBarco} m/s, Velocidade da Correnteza: {velCorrenteza} m/s, Ângulo: {angulo * 180 / Math.PI}°";
                 historicoTentativas.Add(tentativa);
+
+                //TODO:implementar SalvarSimulacao(variavel1, variavel2, etc...);
             }
             catch (FormatException)
             {
