@@ -28,50 +28,131 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Largura = new System.Windows.Forms.TextBox();
-            this.Enviar = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxLargura = new System.Windows.Forms.TextBox();
+            this.textBoxVel_Barco = new System.Windows.Forms.TextBox();
+            this.textBoxVel_Correnteza = new System.Windows.Forms.TextBox();
+            this.textBoxAngulo = new System.Windows.Forms.TextBox();
+            this.buttonIniciar = new System.Windows.Forms.Button();
+            this.buttonHistorico = new System.Windows.Forms.Button();
             // 
-            // Largura
+            // label1
             // 
-            this.Largura.Location = new System.Drawing.Point(42, 41);
-            this.Largura.Name = "Largura";
-            this.Largura.Size = new System.Drawing.Size(127, 20);
-            this.Largura.TabIndex = 0;
-            this.Largura.Text = "Largura do rio (em m):  ";
-            this.Largura.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Largura do Rio (m):";
             // 
-            // Enviar
+            // label2
             // 
-            this.Enviar.Location = new System.Drawing.Point(429, 331);
-            this.Enviar.Name = "Enviar";
-            this.Enviar.Size = new System.Drawing.Size(159, 23);
-            this.Enviar.TabIndex = 1;
-            this.Enviar.Text = "Gerar Resultado";
-            this.Enviar.UseVisualStyleBackColor = true;
-            this.Enviar.Click += new System.EventHandler(this.Enviar_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(135, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Velocidade do Barco (m/s):";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(20, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(146, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Velocidade da Correnteza (m/s):";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 140);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Ângulo (°):";
+            // 
+            // textBoxLargura
+            // 
+            this.textBoxLargura.Location = new System.Drawing.Point(220, 20);
+            this.textBoxLargura.Name = "textBoxLargura";
+            this.textBoxLargura.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLargura.TabIndex = 4;
+            // 
+            // textBoxVel_Barco
+            // 
+            this.textBoxVel_Barco.Location = new System.Drawing.Point(220, 60);
+            this.textBoxVel_Barco.Name = "textBoxVel_Barco";
+            this.textBoxVel_Barco.Size = new System.Drawing.Size(100, 20);
+            this.textBoxVel_Barco.TabIndex = 5;
+            // 
+            // textBoxVel_Correnteza
+            // 
+            this.textBoxVel_Correnteza.Location = new System.Drawing.Point(220, 100);
+            this.textBoxVel_Correnteza.Name = "textBoxVel_Correnteza";
+            this.textBoxVel_Correnteza.Size = new System.Drawing.Size(100, 20);
+            this.textBoxVel_Correnteza.TabIndex = 6;
+            // 
+            // textBoxAngulo
+            // 
+            this.textBoxAngulo.Location = new System.Drawing.Point(220, 140);
+            this.textBoxAngulo.Name = "textBoxAngulo";
+            this.textBoxAngulo.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAngulo.TabIndex = 7;
+            // 
+            // buttonIniciar
+            // 
+            this.buttonIniciar.Location = new System.Drawing.Point(20, 180);
+            this.buttonIniciar.Name = "buttonIniciar";
+            this.buttonIniciar.Size = new System.Drawing.Size(100, 30);
+            this.buttonIniciar.TabIndex = 8;
+            this.buttonIniciar.Text = "Iniciar Simulação";
+            this.buttonIniciar.UseVisualStyleBackColor = true;
+            this.buttonIniciar.Click += new System.EventHandler(this.buttonIniciar_Click);
+            // 
+            // buttonHistorico
+            // 
+            this.buttonHistorico.Location = new System.Drawing.Point(150, 180);
+            this.buttonHistorico.Name = "buttonHistorico";
+            this.buttonHistorico.Size = new System.Drawing.Size(100, 30);
+            this.buttonHistorico.TabIndex = 9;
+            this.buttonHistorico.Text = "Ver Histórico";
+            this.buttonHistorico.UseVisualStyleBackColor = true;
+            this.buttonHistorico.Click += new System.EventHandler(this.buttonHistorico_Click);
             // 
             // TelaInicial
             // 
-            this.AccessibleName = "Tela Inicial";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
-            this.Controls.Add(this.Enviar);
-            this.Controls.Add(this.Largura);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClientSize = new System.Drawing.Size(350, 230);
+            this.Controls.Add(this.buttonHistorico);
+            this.Controls.Add(this.buttonIniciar);
+            this.Controls.Add(this.textBoxAngulo);
+            this.Controls.Add(this.textBoxVel_Correnteza);
+            this.Controls.Add(this.textBoxVel_Barco);
+            this.Controls.Add(this.textBoxLargura);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Name = "TelaInicial";
-            this.Text = "Tela inicial";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "Simulador de Trajetória do Barco";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox Largura;
-        private System.Windows.Forms.Button Enviar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxLargura;
+        private System.Windows.Forms.TextBox textBoxVel_Barco;
+        private System.Windows.Forms.TextBox textBoxVel_Correnteza;
+        private System.Windows.Forms.TextBox textBoxAngulo;
+        private System.Windows.Forms.Button buttonIniciar;
+        private System.Windows.Forms.Button buttonHistorico;
     }
 }
-
