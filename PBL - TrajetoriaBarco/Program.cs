@@ -14,7 +14,7 @@ namespace PBL___TrajetoriaBarco
         [STAThread]
         static void Main()
         {
-            //Teste 123
+            //Teste 1234
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TelaInicial());
