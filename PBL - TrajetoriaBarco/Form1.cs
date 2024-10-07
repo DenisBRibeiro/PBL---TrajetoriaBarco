@@ -14,6 +14,9 @@ namespace PBL___TrajetoriaBarco
         private double largura;
         private double T; // Tempo total de travessia
         private List<string> historicoTentativas; // Lista para armazenar o histórico de tentativas
+        private double anguloCorreto;
+        private double Tmin;
+        private double anguloCorretoEmGraus;
 
         public TelaInicial()
         {
@@ -135,16 +138,26 @@ namespace PBL___TrajetoriaBarco
                     throw new ArgumentOutOfRangeException("Ângulo deve estar entre 20° e 160°.");
 
                 // Convertendo ângulo para radianos
-                angulo = angulo * Math.PI / 180;
+                double anguloRad = angulo * Math.PI / 180;
 
-                // Calculando o tempo de travessia 
-                T = largura / (velBarco * Math.Sin(angulo)); // Tempo total de travessia
+                // Calculando o ângulo para travessia perpendicular
+                double anguloCorreto = Math.Atan(velCorrenteza / velBarco); // em radianos
+                double anguloCorretoEmGraus = anguloCorreto * (180 / Math.PI); // convertendo para graus
+
+                // Calculando o tempo mínimo
+                Tmin = largura / velBarco; // Tempo mínimo para travessia
+
+                // Calculando o tempo total de travessia usando o ângulo correto
+                T = largura / (velBarco * Math.Sin(anguloCorreto)); // Tempo total de travessia
 
                 // Adicionando a tentativa ao histórico
-                string tentativa = $"Largura: {largura} m, Velocidade do Barco: {velBarco} m/s, Velocidade da Correnteza: {velCorrenteza} m/s, Ângulo: {angulo * 180 / Math.PI}°";
+                string tentativa = $"Largura: {largura:F2} m, Velocidade do Barco: {velBarco:F2} m/s, " +
+                                   $"Velocidade da Correnteza: {velCorrenteza:F2} m/s, Ângulo: {angulo:F2}°";
                 historicoTentativas.Add(tentativa);
 
-                //TODO:implementar SalvarSimulacao(variavel1, variavel2, etc...);
+                // Exibindo a mensagem com os resultados
+                MessageBox.Show($"O tempo da travessia nessas condições é: {T:F2}s\n" +
+                                $"Já o tempo mínimo seria: {Tmin:F2}s com uma angulação de {anguloCorretoEmGraus:F2}º.");
             }
             catch (FormatException)
             {
@@ -159,6 +172,8 @@ namespace PBL___TrajetoriaBarco
                 MessageBox.Show("Ocorreu um erro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void buttonHistorico_Click(object sender, EventArgs e)
         {
