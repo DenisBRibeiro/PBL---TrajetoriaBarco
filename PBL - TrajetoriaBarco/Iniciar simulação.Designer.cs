@@ -38,6 +38,7 @@
             this.textBoxAngulo = new System.Windows.Forms.TextBox();
             this.buttonIniciar = new System.Windows.Forms.Button();
             this.buttonHistorico = new System.Windows.Forms.Button();
+            this.btnfechar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -116,7 +117,7 @@
             // 
             // buttonHistorico
             // 
-            this.buttonHistorico.Location = new System.Drawing.Point(150, 180);
+            this.buttonHistorico.Location = new System.Drawing.Point(137, 180);
             this.buttonHistorico.Name = "buttonHistorico";
             this.buttonHistorico.Size = new System.Drawing.Size(100, 30);
             this.buttonHistorico.TabIndex = 9;
@@ -124,9 +125,23 @@
             this.buttonHistorico.UseVisualStyleBackColor = true;
             this.buttonHistorico.Click += new System.EventHandler(this.buttonHistorico_Click);
             // 
+            // btnfechar
+            // 
+            this.btnfechar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(158)))), ((int)(((byte)(240)))));
+            this.btnfechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnfechar.Font = new System.Drawing.Font("Lucida Sans", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnfechar.Location = new System.Drawing.Point(260, 189);
+            this.btnfechar.Name = "btnfechar";
+            this.btnfechar.Size = new System.Drawing.Size(80, 28);
+            this.btnfechar.TabIndex = 10;
+            this.btnfechar.Text = "Fechar";
+            this.btnfechar.UseVisualStyleBackColor = false;
+            this.btnfechar.Click += new System.EventHandler(this.btnfechar_Click);
+            // 
             // TelaInicial
             // 
             this.ClientSize = new System.Drawing.Size(350, 230);
+            this.Controls.Add(this.btnfechar);
             this.Controls.Add(this.buttonHistorico);
             this.Controls.Add(this.buttonIniciar);
             this.Controls.Add(this.textBoxAngulo);
@@ -158,5 +173,6 @@
         private System.Windows.Forms.TextBox textBoxAngulo;
         private System.Windows.Forms.Button buttonIniciar;
         private System.Windows.Forms.Button buttonHistorico;
+        private System.Windows.Forms.Button btnfechar;
     }
 }

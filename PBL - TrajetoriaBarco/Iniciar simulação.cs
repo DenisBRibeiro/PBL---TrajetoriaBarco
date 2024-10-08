@@ -243,5 +243,10 @@ namespace PBL___TrajetoriaBarco
             this.WindowState = FormWindowState.Maximized;
             this.FormBorderStyle = FormBorderStyle.None; // Remove as bordas
         }
+
+        private void btnfechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
