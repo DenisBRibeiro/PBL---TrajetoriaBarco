@@ -134,7 +134,7 @@ namespace PBL___TrajetoriaBarco
 
                 // Lendo e validando o ângulo
                 angulo = double.Parse(textBoxAngulo.Text);
-                if (angulo <= 20 || angulo >= 160)
+                if (angulo < 20 || angulo > 160)
                     throw new ArgumentOutOfRangeException("Ângulo deve estar entre 20° e 160°.");
 
                 // Convertendo ângulo para radianos
@@ -235,6 +235,13 @@ namespace PBL___TrajetoriaBarco
             selecionarTentativaForm.Controls.Add(usarDadosButton);
             selecionarTentativaForm.Controls.Add(voltarButton);
             selecionarTentativaForm.ShowDialog();
+        }
+
+        private void TelaInicial_Load(object sender, EventArgs e)
+        {
+            // Configura o formulário para abrir em tela cheia
+            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = FormBorderStyle.None; // Remove as bordas
         }
     }
 }

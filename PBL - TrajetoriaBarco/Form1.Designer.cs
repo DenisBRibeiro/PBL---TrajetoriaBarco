@@ -140,6 +140,7 @@
             this.Name = "TelaInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Simulador de Trajetória do Barco";
+            this.Load += new System.EventHandler(this.TelaInicial_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
