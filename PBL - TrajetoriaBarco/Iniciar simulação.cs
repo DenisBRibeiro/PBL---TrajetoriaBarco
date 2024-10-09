@@ -138,7 +138,24 @@ namespace PBL___TrajetoriaBarco
                     throw new ArgumentOutOfRangeException("Ângulo deve estar entre 20° e 160°.");
 
                 // Convertendo ângulo para radianos
-                double anguloRad = angulo * Math.PI / 180;
+                double anguloEmRadianos = angulo * (Math.PI / 180);
+
+                // A velocidade do barco tem esses valores no X e Y
+                double decomposicaoEmX = velBarco * Math.Sin(anguloEmRadianos);
+                double decomposicaoEmY = velBarco * Math.Cos(anguloEmRadianos);
+
+                // Quanto tempo vai demorar para atravessar
+                T = Math.Abs(largura / decomposicaoEmY);
+
+                // Listas para armazenar os valores de X e Y em cada segundo da travessia
+                List<double> valoresEmY = new List<double>();
+                List<double> valoresEmX = new List<double>();
+
+                for (double i = 0; i <= T + 0.5; i += 0.5) // valores de X e Y a cada meio segundo
+                {
+                    valoresEmY.Add(decomposicaoEmY * i);
+                    valoresEmX.Add((decomposicaoEmX + velCorrenteza) * i);
+                }
 
                 // Calculando o ângulo para travessia perpendicular
                 double anguloCorreto = Math.Atan(velCorrenteza / velBarco); // em radianos
@@ -147,17 +164,31 @@ namespace PBL___TrajetoriaBarco
                 // Calculando o tempo mínimo
                 Tmin = largura / velBarco; // Tempo mínimo para travessia
 
-                // Calculando o tempo total de travessia usando o ângulo correto
-                T = largura / (velBarco * Math.Sin(anguloCorreto)); // Tempo total de travessia
-
                 // Adicionando a tentativa ao histórico
                 string tentativa = $"Largura: {largura:F2} m, Velocidade do Barco: {velBarco:F2} m/s, " +
                                    $"Velocidade da Correnteza: {velCorrenteza:F2} m/s, Ângulo: {angulo:F2}°";
                 historicoTentativas.Add(tentativa);
 
+                // Essa parte é apenas para verificar os valores em X e Y, pode ser apagada depois
+                // Usando StringBuilder para montar a mensagem
+                StringBuilder mensagemX = new StringBuilder("Valores de X: ");
+                foreach (var valor in valoresEmX)
+                {
+                    mensagemX.Append(valor.ToString("F2") + " ");
+                }
+
+                StringBuilder mensagemY = new StringBuilder("\nValores de Y: ");
+                foreach (var valor in valoresEmY)
+                {
+                    mensagemY.Append(valor.ToString("F2") + " ");
+                }
+
+                // Exibindo a mensagem
+                MessageBox.Show(mensagemX.ToString() + mensagemY.ToString());
+
                 // Exibindo a mensagem com os resultados
                 MessageBox.Show($"O tempo da travessia nessas condições é: {T:F2}s\n" +
-                                $"Já o tempo mínimo seria: {Tmin:F2}s com uma angulação de {anguloCorretoEmGraus:F2}º.");
+                $"Já o tempo mínimo seria: {Tmin:F2}s com uma angulação de {anguloCorretoEmGraus:F2}º.");
             }
             catch (FormatException)
             {
@@ -172,6 +203,7 @@ namespace PBL___TrajetoriaBarco
                 MessageBox.Show("Ocorreu um erro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 
