@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -112,7 +113,6 @@ namespace PBL___TrajetoriaBarco
         //        MessageBox.Show($"Erro inesperado ao carregar o histórico: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }
         //}
-
         private void buttonIniciar_Click(object sender, EventArgs e)
         {
             try
@@ -140,59 +140,59 @@ namespace PBL___TrajetoriaBarco
                 // Convertendo ângulo para radianos
                 double anguloEmRadianos = angulo * (Math.PI / 180);
 
-                // A velocidade do barco tem esses valores no X e Y
-                double decomposicaoEmX = velBarco * Math.Sin(anguloEmRadianos);
-                double decomposicaoEmY = velBarco * Math.Cos(anguloEmRadianos);
+                // Decomposição do vetor do barco
+                double velX_Barco = velBarco * Math.Cos(anguloEmRadianos);
+                double velY_Barco = velBarco * Math.Sin(anguloEmRadianos);
 
-                // Quanto tempo vai demorar para atravessar
-                T = Math.Abs(largura / decomposicaoEmY);
+                // Vetor velocidade resultante (considerando a correnteza)
+                double velX_Resultante = velX_Barco + velCorrenteza;
+                double velY_Resultante = velY_Barco;
 
-                // Listas para armazenar os valores de X e Y em cada segundo da travessia
-                List<double> valoresEmY = new List<double>();
-                List<double> valoresEmX = new List<double>();
+                // Ângulo do movimento resultante (barco em relação às margens)
+                double anguloResultante = Math.Atan2(velY_Resultante, velX_Resultante) * (180 / Math.PI);
 
-                for (double i = 0; i <= T + 0.5; i += 0.5) // valores de X e Y a cada meio segundo
+                // Tempo de travessia
+                T = largura / velY_Resultante;
+
+                List<double> valoresX = new List<double>();
+                List<double> valoresY = new List<double>();
+
+                for (double i = 0; i <= T; i += T/10)
                 {
-                    valoresEmY.Add(decomposicaoEmY * i);
-                    valoresEmX.Add((decomposicaoEmX + velCorrenteza) * i);
+                    valoresX.Add(velX_Resultante * i);
+                    valoresY.Add(velY_Resultante * i);
                 }
 
-                // Calculando o ângulo para travessia perpendicular
-                double anguloCorreto = Math.Atan(velCorrenteza / velBarco); // em radianos
-                double anguloCorretoEmGraus = anguloCorreto * (180 / Math.PI); // convertendo para graus
+                // Ponto de chegada do barco
+                double xFinal = velX_Resultante * T;
+                double yFinal = velY_Resultante * T;
 
-                // Calculando o tempo mínimo
-                Tmin = largura / velBarco; // Tempo mínimo para travessia
+                // Tempo mínimo de travessia (sem correnteza)
+                Tmin = largura / velBarco;
 
-                // Adicionando a tentativa ao histórico
+                // Adicionando ao histórico
                 string tentativa = $"Largura: {largura:F2} m, Velocidade do Barco: {velBarco:F2} m/s, " +
                                    $"Velocidade da Correnteza: {velCorrenteza:F2} m/s, Ângulo: {angulo:F2}°";
                 historicoTentativas.Add(tentativa);
 
-                // Essa parte é apenas para verificar os valores em X e Y, pode ser apagada depois
-                // Usando StringBuilder para montar a mensagem
-                StringBuilder mensagemX = new StringBuilder("Valores de X: ");
-                foreach (var valor in valoresEmX)
-                {
-                    mensagemX.Append(valor.ToString("F2") + " ");
-                }
+                string valoresXStr = string.Join(", ", valoresX.Select(v => v.ToString("F2")));
+                string valoresYStr = string.Join(", ", valoresY.Select(v => v.ToString("F2")));
 
-                StringBuilder mensagemY = new StringBuilder("\nValores de Y: ");
-                foreach (var valor in valoresEmY)
-                {
-                    mensagemY.Append(valor.ToString("F2") + " ");
-                }
+                // Exibindo os resultados
+                StringBuilder mensagem = new StringBuilder();
+                mensagem.AppendLine($"Ângulo resultante: {anguloResultante:F2}°");
+                mensagem.AppendLine($"Tempo de travessia: {T:F2} s");
+                mensagem.AppendLine($"Tempo mínimo (sem correnteza): {Tmin:F2} s");
+                mensagem.AppendLine($"Ponto de chegada: ({xFinal:F2}, {yFinal:F2}) m");
+                mensagem.AppendLine($"Valores em X: {valoresXStr}");
+                mensagem.AppendLine($"Valores em Y: {valoresYStr}");
 
-                // Exibindo a mensagem
-                MessageBox.Show(mensagemX.ToString() + mensagemY.ToString());
-
-                // Exibindo a mensagem com os resultados
-                MessageBox.Show($"O tempo da travessia nessas condições é: {T:F2}s\n" +
-                $"Já o tempo mínimo seria: {Tmin:F2}s com uma angulação de {anguloCorretoEmGraus:F2}º.");
+                MessageBox.Show(mensagem.ToString(), "Resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (FormatException)
             {
-                MessageBox.Show("Por favor, insira valores numéricos válidos.", "Erro de Entrada", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, insira valores numéricos válidos.", "Erro de Entrada",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -203,9 +203,6 @@ namespace PBL___TrajetoriaBarco
                 MessageBox.Show("Ocorreu um erro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
 
         private void buttonHistorico_Click(object sender, EventArgs e)
         {
@@ -271,9 +268,8 @@ namespace PBL___TrajetoriaBarco
 
         private void TelaInicial_Load(object sender, EventArgs e)
         {
-            // Configura o formulário para abrir em tela cheia
             this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = FormBorderStyle.None; // Remove as bordas
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void btnfechar_Click(object sender, EventArgs e)
